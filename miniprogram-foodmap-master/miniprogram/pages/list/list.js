@@ -8,8 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3175633703,3855171020&fm=27&gp=0.jpg',
     numbers: 0,
-    stores: []
+    stores: [],
+    photoWidth: wx.getSystemInfoSync().windowWidth / 5,
   },
 
   /**
@@ -27,7 +29,7 @@ Page({
        */
       if (res.data.length == 0) {
         wx.showToast({
-          title: '没有别的店铺了！',
+          title: '没有了！',
           icon: 'none'
         });
         return;
@@ -47,6 +49,16 @@ Page({
   navigateToSearch:function(e){
     wx.redirectTo({
       url: '../search/search',
+    })
+  },
+  // 点击图片进行大图查看
+  LookPhoto: function(e) {
+     //console.log(this.data.stores[0].images)
+    wx.previewImage({
+      current: e.currentTarget.dataset.photurl,
+     
+      
+      urls: this.data.stores[0].images,
     })
   }
 })

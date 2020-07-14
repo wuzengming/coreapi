@@ -1,6 +1,63 @@
-<input class="search_input" placeholder='点我开始搜索' bindinput="navigateToSearch" bindfocus="navigateToSearch"></input>
-<block wx:for="{{stores}}" wx:key="_id">
-  <navigator url="../info/info?id={{item._id}}">
+  <!--<input class="search_input" placeholder='点我开始搜索' bindinput="navigateToSearch" bindfocus="navigateToSearch"></input>-->
+<scroll-view class='page'>
+<view class='CircleList' wx:for="{{stores}}" wx:key="_id">
+  <view class='body-view'>
+      <!-- 头像 -->
+      <view class='left-view'>
+        <image class='user-icon' src='{{icon}}'></image>
+      </view>
+      <view class='right-view'>
+     
+        <!-- <view class='user-name-view'>
+          <label class='user-name'>{{item.title}}</label>
+        </view> -->
+         <!-- 时间、删除按钮、点赞评论按钮 -->
+        <view class='TDD-view'>
+          <label>2018-07-25 10:14:23</label>
+        </view>
+        <!-- 内容 -->
+        <view class='user-content-view'>
+          <text class='user-content'>{{item.notes}}</text> 
+        </view>
+        <!-- 图片 -->
+        <view class='photo-view'>
+          <view class='photo' wx:for='{{item.images}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'>
+            <image bindtap='LookPhoto' data-photUrl='{{item}}' src='{{item}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'></image>
+          </view>
+        </view>
+        <!-- 地理位置 -->
+        <view class='user-address-view'>
+          <label>{{item.address}}</label>
+        </view>
+
+       
+
+        <!-- 点赞-->
+        <view class='zan-view'>
+           <!-- <view class='trigon-view'>
+            <image mode='aspectFill' class='trigon' src='/images/trigon.png'></image>
+          </view> 
+
+          
+          <view class='zan-bg-view'>
+            <view class='zan-user-view' wx:for='{{zanSource}}'>
+              <label bindtap='TouchZanUser' data-name='{{item}}' class='zan-user'>{{item}},</label>
+            </view>
+          </view> -->
+          <view class='line'></view>
+          <!-- 评论 
+          <view class='discuss-view'>
+
+            <view class='discuss' wx:for='{{contnet}}'>
+              <label bindtap='TouchZanUser' data-name='{{item.firstname}}' class='discuss-user'>{{item.firstname}}：</label>
+              <label class='content'>{{item.content}}</label>
+            </view>
+          </view>-->
+        </view>
+      </view>
+
+    </view>
+  <!--  <navigator url="../info/info?id={{item._id}}">
     <view class="card">
       <view class="card_title">{{item.title}}</view>
       <view class="card_infobar">
@@ -8,5 +65,6 @@
         <view class="card_thumbsup">{{item.thumbs_up}}</view>
       </view>
     </view>
-  </navigator>
-</block>
+  </navigator>-->
+</view>
+</scroll-view>

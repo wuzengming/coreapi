@@ -10,7 +10,7 @@
 	</cover-view>
  
 	<!-- 查看全部 -->
-	<cover-view class="button show_all" bindtap="onChangeShowPosition" bindlongpress='showAdmin'>查看全部</cover-view>
+	<cover-view class="button show_all" bindtap="viewAll" bindlongpress='showAdmin'>查看全部</cover-view>
    
     
 
