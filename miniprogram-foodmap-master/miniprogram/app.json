@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/list/list",
     "pages/add/add",
-    "pages/map/map",
+
     "pages/info/info",
     "pages/search/search"
   ],
@@ -12,6 +13,28 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "户外分享",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+   
+    "selectedColor": "#D73E3E",
+    "backgroundColor": "#F3F1EF",
+    "borderStyle": "white",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "地图",
+      "iconPath": "images/trigon.png",
+      "selectedIconPath": "images/trigon.png"
+    }, {
+      "pagePath": "pages/list/list",
+      "text": "列表",
+      "iconPath": "images/trigon.png",
+      "selectedIconPath": "images/trigon.png"
+    }, {
+      "pagePath": "pages/add/add",
+      "text": "添加",
+      "iconPath": "images/trigon.png",
+      "selectedIconPath": "images/trigon.png"
+    }]
   },
   "permission": {
     "scope.userLocation": {

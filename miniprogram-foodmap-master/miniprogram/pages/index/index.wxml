@@ -1,0 +1,7 @@
+<map id="map" scale="{{defaultScale}}" longitude='{{longitude}}' latitude='{{latitude}}' style='height:{{windowHeight}}px' markers="{{stores}}" show-location="{{showPosition}}"  subkey="{{mapSubKey}}" show-compass="{{true}}" enable-3D="{{true}}" enable-rotate="{{true}}" bindmarkertap="onMarkerTap">
+
+
+ 
+
+
+</map>
