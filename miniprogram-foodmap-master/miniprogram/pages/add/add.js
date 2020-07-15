@@ -53,27 +53,44 @@ Page({
         }
       }
     })
-
   },
   createItem: function (event) {
+   
     wx.showLoading({
       title: '上传数据中...',
     })
+    let urls = [];
     Promise.all(uploadTask).then(result => {
-
-      let urls = [];
       for (const file of result) {
         urls.push(file.fileID);
+        console.log(file.fileID);
       }
-      this.setData({
-        images: urls
-      }, res => {
+      let value = event.detail.value
+      store.add({
+        data: {
+          ...value,
+          thumbs_up: 1,
+          iconPath: "/images/food.png",
+          longitude: this.data.longitude,
+          latitude: this.data.latitude,
+          label: {
+            content: value.title
+          },
+          
+          images: urls
+        }
+      }).then(res => {
         wx.hideLoading();
         wx.showToast({
-          title: '上传图片成功',
-          icon: 'success'
+          title: '创建成功！',
+          icon: 'success',
+          success: res => {
+            wx.navigateBack({})
+          }
         })
-      })
+      }).catch(error => {
+        console.error(error);
+      })  
     }).catch(() => {
       wx.hideLoading()
       wx.showToast({
@@ -81,66 +98,11 @@ Page({
         icon: 'error'
       })
     })
-    let value = event.detail.value
-    store.add({
-      data: {
-        ...value,
-        thumbs_up: 1,
-        iconPath: "/images/food.png",
-        longitude: this.data.longitude,
-        latitude: this.data.latitude,
-        label: {
-          content: value.title
-        },
-        images: this.data.images
-      }
-    }).then(res => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '创建成功！',
-        icon: 'success',
-        success: res => {
-          wx.navigateBack({})
-        }
-      })
-    }).catch(error => {
-      console.error(error);
-    })
+ 
   },
 
-  uploadImage: function (e) {
-    wx.chooseImage({
-      count: 9,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-
-        wx.showLoading({
-          title: '上传中'
-        })
-        let tempFilePaths = res.tempFilePaths
-        let items = [];
-        for (const tempFilePath of tempFilePaths) {
-          items.push({
-            src: tempFilePath
-          })
-        }
-         uploadTask = items.map(item => this.uploadPhoto(item.src))
 
 
-
-        this.setData({
-          tempPhoto: items
-        })
-      }
-    })
-  },
-  uploadPhoto(filePath) {
-    return wx.cloud.uploadFile({
-      cloudPath: `${Date.now()}-${Math.floor(Math.random(0, 1) * 10000000)}.png`,
-      filePath
-    })
-  },
   // 删除图片
   clearImg: function (e) {
     var nowList = []; //新数据
@@ -174,7 +136,7 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         let tempFilePaths = res.tempFilePaths
 
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -195,13 +157,19 @@ Page({
             src: tempFilePath
           })
         }
-        console.log(item.src);
+        //console.log(item.src);
 
-         uploadTask = items.map(item => this.uploadPhoto(item.src))
-        this.setData({
+        uploadTask = items.map(item => that.uploadPhoto(item.src))
+        that.setData({
           tempPhoto: items
         })
       }
     })
-  }
+  },
+  uploadPhoto(filePath) {
+    return wx.cloud.uploadFile({
+      cloudPath: `${Date.now()}-${Math.floor(Math.random(0, 1) * 10000000)}.png`,
+      filePath
+    })
+  },
 })
