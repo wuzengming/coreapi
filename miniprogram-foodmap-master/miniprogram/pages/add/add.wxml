@@ -1,17 +1,7 @@
 <form report-submit='true' onsubmit="createItem">
-	<view class='desc'>位置设定</view>
-	<view class="loactionGroup">
-		<button bindtap='chooseLocation' type='primary'>地图选址</button>
-	</view>
-	<view class='desc'>位置</view>
-	<input placeholder='位置' name="address" value='{{address}}'></input>
+<button class='submit' type="primary" form-type='submit'>创建</button>
 	<textarea placeholder='写下你此刻的想法吧..' name="notes" value="{{notes}}"></textarea>
-	
-	<view class='desc'>照片</view>
-	<button bindtap='uploadImage'>点我选择照片</button>
-	<button class='submit' type="primary" form-type='submit'>创建</button>
-
-<view class='ui_uploader_cell'>
+	<view class='ui_uploader_cell'>
     <!-- 根据已选择的图片临时路径数组展示图片-->
     <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
         <!-- 删除-->
@@ -22,5 +12,12 @@
     <!-- 上传按钮+框 -->
     <view class='ui_uploader' bindtap='upload' wx:if="{{showUpload}}"></view>
 </view>
+
+	<view class="loactionGroup">
+		<button bindtap='chooseLocation' type='primary'>地图选址</button>
+	</view>
+	<label></label>
+	<input type="hidden"  name="address"  value="{{address}}" > </input>
+	 
 
 </form>

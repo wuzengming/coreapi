@@ -11,23 +11,8 @@ Page({
     icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3175633703,3855171020&fm=27&gp=0.jpg',
     numbers: 0,
     stores: [],
-    photoWidth: wx.getSystemInfoSync().windowWidth / 5,
-    list: [{
-      "pagePath": "pages/list/list",
-      "text": "首页",
-      "iconPath": "images/bar/index-0.jpg",
-      "selectedIconPath": "images/bar/index-1.jpg"
-    }, {
-      "pagePath": "pages/add/add",
-      "text": "现金券",
-      "iconPath": "images/bar/cash-0.jpg",
-      "selectedIconPath": "images/bar/cash-1.jpg"
-    }, {
-      "pagePath": "pages/map/map",
-      "text": "婚博会",
-      "iconPath": "images/bar/marry-0.jpg",
-      "selectedIconPath": "images/bar/marry-1.jpg"
-    }]
+    photoWidth: wx.getSystemInfoSync().windowWidth / 5
+    
   },
   switchNav: function (e) { var id = e.currentTarget.id; this.setData({ currentTab: id }); },
   /**
@@ -41,7 +26,7 @@ Page({
   loadData: function () {
     store.skip(this.data.numbers).get().then(res => {
       /**
-       * 如果没有数据，就提示没有商户了，并返回。
+       * 如果没有数据，返回。
        */
       if (res.data.length == 0) {
         wx.showToast({
@@ -69,12 +54,12 @@ Page({
   },
   // 点击图片进行大图查看
   LookPhoto: function (e) {
-    //console.log(this.data.stores[0].images)
+    console.log(e)
     wx.previewImage({
       current: e.currentTarget.dataset.photurl,
 
 
-      urls: this.data.stores[0].images,
+      urls: this.data.stores[e.currentTarget.dataset.index].images,
     })
   }
 })
